@@ -6,9 +6,9 @@
 #define SEGS P1
 #define GROUP P3
 
-#define BTN_RUN P2_0
-#define BTN_DEC P2_1
-#define BTN_INC P2_2
+#define BTN_DEC P2_0
+#define BTN_INC P2_1
+#define BTN_RUN P2_2
 #define BEEP P2_3
 
 // #define start_timer() { is_running = 1; TR1 = 1; }
