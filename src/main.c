@@ -17,9 +17,11 @@
 #define MODE_50MIN 0
 #define MODE_10MIN 1
 
+#define POWER_DOWN_COUNTER_VALUE 50000L * 170
 
 
-// 20ms
+
+// 2ms
 #define T0_INTERVAL 2000
 #define reset_T0() { TL0 = (65536 - T0_INTERVAL) % 256; TH0 = (65536 - T0_INTERVAL) / 256; }
 
@@ -38,6 +40,7 @@ __code unsigned char sevenseg_hex[] = {
 
 
 void init();
+void shutdown();
 void delay(int n){
   while (n--);
 }
@@ -68,6 +71,7 @@ void beep() {
 }
 
 
+unsigned long power_down_counter = POWER_DOWN_COUNTER_VALUE;
 unsigned int timer_100msecs;
 unsigned char is_running = 0;
 unsigned char is_time_up = 0;
@@ -93,6 +97,10 @@ unsigned char timer_changed;
 void start_timer() {
   is_time_up = 0;
   is_running = 1;
+
+  // reset power down counter
+  power_down_counter = POWER_DOWN_COUNTER_VALUE;
+
   TR1 = 1;
 }
 
@@ -233,7 +241,28 @@ void main() {
       show();
 
     }
+
+    // power-down if not running for 5 min
+    if (!is_running && (timer_100msecs == 30000 || timer_100msecs == 6000)) {
+      power_down_counter--;
+      if (power_down_counter == 0) {
+
+        // power down
+        shutdown();
+      }
+    }
   }
+}
+
+void shutdown() {
+  TR0 = 0;
+  TR1 = 0;
+  EA = 0;
+
+  GROUP = 0xff;
+  SEGS = 0xff;
+
+  PCON = PD;
 }
 
 void init() {
