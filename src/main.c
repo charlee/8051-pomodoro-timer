@@ -17,6 +17,7 @@
 #define MODE_50MIN 0
 #define MODE_10MIN 1
 
+// auto shutdown timer = 5min
 #define POWER_DOWN_COUNTER_VALUE 50000L * 170
 
 
