@@ -6,6 +6,12 @@ This is a DIY project that creates a "Pomodoro Timer" which helps you focus on y
 The MCU used in this project is an AT89C52, with a 12MHz crystal oscillator. You can use any MCS51 compatible MCU.
 
 
+Schematics
+------------
+
+![Schematic](schematics/8051-timer-schematic.png)
+
+
 Development
 --------------
 
