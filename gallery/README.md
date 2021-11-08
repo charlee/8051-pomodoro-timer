@@ -16,9 +16,9 @@ MCU installed:
 
 ![MCU installed](8051-timer-battery-with-ic.jpg)
 
-Battery installed:
+Battery case installed:
 
-![MCU installed](8051-timer-battery-with-battery.jpg)
+![MCU installed](8051-timer-battery-with-battery-holder.jpg)
 
 Working product:
 
